@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+@keyframes scan-progress {
+  0% {
+    transform: translateX(-140%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.scan-progress {
+  animation: scan-progress 1.6s ease-in-out infinite;
+}
+
+.skeleton-pulse {
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
