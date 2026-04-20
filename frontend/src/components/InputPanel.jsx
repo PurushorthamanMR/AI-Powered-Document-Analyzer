@@ -5,22 +5,24 @@ function InputPanel({ onAnalyze, isLoading }) {
   const [text, setText] = useState("");
 
   const hasInput = Boolean(selectedFile || text.trim());
+  const isSubmitDisabled = !hasInput || isLoading;
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!hasInput || isLoading) {
+    if (isSubmitDisabled) {
       return;
     }
 
-    onAnalyze({
-      file: selectedFile,
-      text,
-    });
+    onAnalyze({ file: selectedFile, text });
   };
 
   const handleFileChange = (event) => {
     const file = event.target.files?.[0] || null;
     setSelectedFile(file);
+  };
+
+  const handleTextChange = (event) => {
+    setText(event.target.value);
   };
 
   return (
@@ -48,7 +50,7 @@ function InputPanel({ onAnalyze, isLoading }) {
         <textarea
           id="rawText"
           value={text}
-          onChange={(event) => setText(event.target.value)}
+          onChange={handleTextChange}
           placeholder="Paste text here if you do not want to upload a PDF..."
           className="min-h-40 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-slate-500 focus:outline-none"
         />
@@ -56,7 +58,7 @@ function InputPanel({ onAnalyze, isLoading }) {
 
       <button
         type="submit"
-        disabled={!hasInput || isLoading}
+        disabled={isSubmitDisabled}
         className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-400"
       >
         {isLoading ? (

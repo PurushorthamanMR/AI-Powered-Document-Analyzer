@@ -1,15 +1,22 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
-export async function analyzeDocument({ file, text }) {
+function buildAnalyzePayload(file, text) {
   const formData = new FormData();
 
   if (file) {
     formData.append("file", file);
   }
 
-  if (text?.trim()) {
-    formData.append("text", text.trim());
+  const cleanedText = text?.trim();
+  if (cleanedText) {
+    formData.append("text", cleanedText);
   }
+
+  return formData;
+}
+
+export async function analyzeDocument({ file, text }) {
+  const formData = buildAnalyzePayload(file, text);
 
   const response = await fetch(`${API_BASE_URL}/api/analyze`, {
     method: "POST",

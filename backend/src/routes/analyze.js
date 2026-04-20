@@ -4,31 +4,37 @@ const { getInputText } = require("../services/extractText");
 const { analyzeDocument } = require("../services/analyzeDocument");
 
 const router = express.Router();
+const MIN_INPUT_LENGTH = 50;
+
+function getValidationError(text) {
+  if (!text) {
+    return "Provide a PDF file or paste text to analyze.";
+  }
+
+  if (text.length < MIN_INPUT_LENGTH) {
+    return "Input is too short. Please provide at least 50 characters.";
+  }
+
+  return "";
+}
 
 router.post("/", upload.single("file"), async (req, res, next) => {
   try {
-    const text = await getInputText({
+    const inputText = await getInputText({
       file: req.file,
       text: req.body?.text,
     });
 
-    if (!text) {
-      return res.status(400).json({
-        error: "Provide a PDF file or paste text to analyze.",
-      });
+    const validationError = getValidationError(inputText);
+    if (validationError) {
+      return res.status(400).json({ error: validationError });
     }
 
-    if (text.length < 50) {
-      return res.status(400).json({
-        error: "Input is too short. Please provide at least 50 characters.",
-      });
-    }
-
-    const result = await analyzeDocument(text);
+    const result = await analyzeDocument(inputText);
 
     return res.status(200).json({
       sourceType: req.file ? "pdf" : "text",
-      inputLength: text.length,
+      inputLength: inputText.length,
       aiProvider: "gemini",
       ...result,
     });

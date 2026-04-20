@@ -1,0 +1,64 @@
+Technical Assignment: AI-Powered Document Analyzer
+Objective
+Build a small web application that allows users to upload a document or input text, and uses AI to generate meaningful insights.
+The goal is to evaluate your ability to:
+●	build a full-stack application
+●	integrate AI into a practical workflow
+●	make clear technical decisions and structure your code well
+
+
+Task Requirements
+1.	Input
+The user should be able to:
+●	Upload a PDF document or
+●	Paste raw text into an input field
+
+
+2.	Processing
+Your application should:
+●	Extract text from the uploaded PDF (if applicable)
+●	Send the extracted or input text to an AI model (e.g., OpenAI API or similar)
+
+
+3.	Output
+Display the following in the UI:
+●	Summary (concise overview)
+●	Key Points (bullet points)
+●	Action Items (practical next steps or insights)
+ 
+ 
+
+4.	Frontend
+●	Simple and clean UI
+●	Upload or text input interface
+●	Display results clearly
+●	Show loading/error states
+
+
+5.	Backend
+●	API to handle:
+○	file upload / text input
+○	AI request
+●	Proper structure (modular, readable code)
+●	Basic error handling
+
+
+Technical Guidelines
+●	Tech stack: Your choice (please justify in README)
+●	You may use any AI API (e.g., OpenAI, Claude, etc.)
+●	Keep the solution simple and focused
+
+
+Time Expectation
+●	Expected effort: 2–3 days
+●	You are not expected to build a production-ready system
+
+
+Deliverables
+Please provide:
+●	Source code (GitHub)
+●	A README including:
+○	setup instructions
+○	how to run the project
+○	tech stack used
+○	brief explanation of your approach and decisions
